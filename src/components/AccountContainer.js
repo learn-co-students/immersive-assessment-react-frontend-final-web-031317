@@ -42,12 +42,35 @@ class AccountContainer extends Component {
     }
   }
 
-  handleChange() {
-    //... your code here
+
+
+  handleChange(categoryName) {
+    this.setState({activeCategory: categoryName})
+    console.log('now the activeCategory is: ', categoryName)
   }
+// input type="text" onChange={this.onChange.bind(this)}
+
+  componentDidMount() {
+    var that = this;
+    var url = 'https://boiling-brook-94902.herokuapp.com/transactions'
+
+    fetch(url)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log('data from url: ', data);
+      that.setState({ transactions: data });
+    });
+  }
+
 
   render() {
     const displayedTransactions = this.state.transactions
+    // const displayedTransactions = this.state.activeCategory
 
     return (
       <div className="ui grid container">
@@ -55,11 +78,13 @@ class AccountContainer extends Component {
         <CategorySelector
           transactions={ displayedTransactions }
           activeCategory={ this.state.activeCategory }
-          handleChange={ "...your code here" }
+          handleChange={ this.handleChange.bind(this) }
         />
 
         <TransactionsList
           transactions={ displayedTransactions }
+          activeCategory={ this.state.activeCategory }
+          //adding activeCategory
         />
 
       </div>

@@ -14,11 +14,11 @@ const CategorySelector = (props) => {
           key={ i }
           checked={ checked }
           category={ category }
+          clicked={props.handleChange} //adding this
         />
       )
     }
   )
-
 
   return (
     <div className="sixteen wide column">
