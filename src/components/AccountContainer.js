@@ -83,7 +83,7 @@ class AccountContainer extends Component {
 
         <TransactionsList
           transactions={ displayedTransactions }
-          // activeCategory={ this.state.activeCategory }
+          activeCategory={ this.state.activeCategory }
           //adding activeCategory
         />
 

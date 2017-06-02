@@ -20,12 +20,6 @@ const CategorySelector = (props) => {
     }
   )
 
-// Figure out how to render only the transactions
-// in which the category matches the active category,
-// or if the active category is 'All', render everything.
-
-//condition ? expr1 : expr2
-
   return (
     <div className="sixteen wide column">
       <div className="ui form">
