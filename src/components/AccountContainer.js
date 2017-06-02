@@ -13,7 +13,6 @@ class AccountContainer extends Component {
     }
   }
 
-  //
   getAPI() {
     fetch('https://boiling-brook-94902.herokuapp.com/transactions')
     .then(response => response.json())
@@ -39,12 +38,8 @@ class AccountContainer extends Component {
 
   render() {
     const displayedTransactions = this.state.transactions.filter( (transaction) =>
-     transaction.category.includes(this.state.activeCategory)
-       )
-
-    //    const allTransactions = this.state.transactions.filter( (transaction) =>
-    //    transaction.category
-    //  )
+      (this.state.activeCategory === "All") ? transaction.category : transaction.category.includes(this.state.activeCategory)
+   )
 
     return (
       <div className="ui grid container">
@@ -57,7 +52,6 @@ class AccountContainer extends Component {
 
         <TransactionsList
           transactions={ displayedTransactions }
-          // transactions={ allTransactions }
         />
 
       </div>
