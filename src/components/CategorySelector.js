@@ -14,11 +14,17 @@ const CategorySelector = (props) => {
           key={ i }
           checked={ checked }
           category={ category }
+          clicked={props.handleChange} //adding this
         />
       )
     }
   )
 
+// Figure out how to render only the transactions
+// in which the category matches the active category,
+// or if the active category is 'All', render everything.
+
+//condition ? expr1 : expr2
 
   return (
     <div className="sixteen wide column">
