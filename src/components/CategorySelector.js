@@ -14,6 +14,7 @@ const CategorySelector = (props) => {
           key={ i }
           checked={ checked }
           category={ category }
+          onChange={props.handleChange}
         />
       )
     }
@@ -25,6 +26,7 @@ const CategorySelector = (props) => {
       <div className="ui form">
         <div className="inline fields">
           { categoryFields }
+
         </div>
       </div>
     </div>
