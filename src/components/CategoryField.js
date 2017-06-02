@@ -1,7 +1,9 @@
 import React from 'react'
 
 const CategoryField = (props) => {
-  const { category, checked }  = props
+  console.log("what is this?", props)
+
+  const { category, checked }  = props //object destructuring
 
   return (
     <div className=" four wide field">
@@ -11,6 +13,7 @@ const CategoryField = (props) => {
           type="radio"
           name="category"
           checked={ checked }
+          handleChange={props.handleChange}
         />
         <label>{ category }</label>
 
