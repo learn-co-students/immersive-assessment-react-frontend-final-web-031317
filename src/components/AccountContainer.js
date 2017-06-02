@@ -42,12 +42,32 @@ class AccountContainer extends Component {
     }
   }
 
-  handleChange() {
-    //... your code here
+  componentDidMount(){
+    console.log("fetching data...so fetch!")
+    fetch('https://boiling-brook-94902.herokuapp.com/transactions')
+    .then( res => res.json())
+    .then(data =>
+      this.setState({
+        transactions: data
+      }))
   }
 
+  handleChange(e) {
+    console.log("accountContainer handle change: ",e.target.name)
+    let category = e.target.name
+    this.setState({
+      activeCategory: category
+    })
+  }
   render() {
     const displayedTransactions = this.state.transactions
+    const filtered = displayedTransactions.filter( trans => {
+      if (this.state.activeCategory === trans.category) {
+        return trans
+      } else if(this.state.activeCategory === "All") {
+        return trans
+      }
+    } )
 
     return (
       <div className="ui grid container">
@@ -55,11 +75,12 @@ class AccountContainer extends Component {
         <CategorySelector
           transactions={ displayedTransactions }
           activeCategory={ this.state.activeCategory }
-          handleChange={ "...your code here" }
+          handleChange={this.handleChange.bind(this)}
         />
 
         <TransactionsList
-          transactions={ displayedTransactions }
+          transactions={ filtered }
+          category={this.state.activeCategory}
         />
 
       </div>
