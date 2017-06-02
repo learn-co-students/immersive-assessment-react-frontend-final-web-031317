@@ -1,4 +1,5 @@
 import React from 'react'
+import Transaction from './Transaction.js'
 
 const TransactionsList = (props) => {
 
@@ -6,15 +7,8 @@ const TransactionsList = (props) => {
       return props.activeCategory === "All" ? transaction : transaction.category === props.activeCategory
   })
 
-  let transactions = filteredTrans.map(transaction => {
-    return (
-      <tr>
-        <td>{transaction.posted_at}</td>
-        <td>{transaction.description}</td>
-        <td>{transaction.category}</td>
-        <td>{transaction.amount}</td>
-      </tr>
-    )
+  let filteredTransactionList = filteredTrans.map( (transaction, index) => {
+    return <Transaction key={index} transaction={transaction}/>
   })
 
   return (
@@ -42,7 +36,7 @@ const TransactionsList = (props) => {
             </h3>
           </th>
         </tr>
-        {transactions}
+        {filteredTransactionList}
       </tbody>
     </table>
   )
