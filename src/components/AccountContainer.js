@@ -38,12 +38,23 @@ class AccountContainer extends Component {
           amount: -365
         }
       ],
-      activeCategory: "All"
+      activeCategory: "All",
+      seletedTransactions: ""
     }
   }
 
-  handleChange() {
-    //... your code here
+  componentDidMount() {
+    fetch("https://boiling-brook-94902.herokuapp.com/transactions")
+    .then((resp)=> resp.json())
+    .then((resp)=> this.setState({ transactions: this.state.transactions.concat(resp) }))
+  }
+
+  handleChange(e) {
+    console.log(e.target.value)
+    this.setState({
+      activeCategory: e.target.value
+    })
+
   }
 
   render() {
@@ -55,12 +66,10 @@ class AccountContainer extends Component {
         <CategorySelector
           transactions={ displayedTransactions }
           activeCategory={ this.state.activeCategory }
-          handleChange={ "...your code here" }
+          handleChange={ this.handleChange.bind(this) }
         />
 
-        <TransactionsList
-          transactions={ displayedTransactions }
-        />
+        <TransactionsList transactions={ displayedTransactions } activeCategory={this.state.activeCategory} />
 
       </div>
     )

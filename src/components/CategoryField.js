@@ -1,6 +1,7 @@
 import React from 'react'
 
 const CategoryField = (props) => {
+ 
   const { category, checked }  = props
 
   return (
@@ -11,6 +12,8 @@ const CategoryField = (props) => {
           type="radio"
           name="category"
           checked={ checked }
+          value={ props.category }
+          onClick={ props.handleChange }
         />
         <label>{ category }</label>
 

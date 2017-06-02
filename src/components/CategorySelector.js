@@ -3,7 +3,7 @@ import CategoryField from './CategoryField'
 import categories from '../categories'
 
 const CategorySelector = (props) => {
-
+console.log("CategorySelector")
   const categoryFields = categories.map(
     (category, i) => {
 
@@ -14,11 +14,11 @@ const CategorySelector = (props) => {
           key={ i }
           checked={ checked }
           category={ category }
+          handleChange= { props.handleChange }
         />
       )
     }
   )
-
 
   return (
     <div className="sixteen wide column">
