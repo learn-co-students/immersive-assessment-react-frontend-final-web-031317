@@ -4,7 +4,9 @@ import categories from '../categories'
 
 const CategorySelector = (props) => {
 
-  const categoryFields = categories.map(
+  console.log('category selector', props)
+
+  const categoryFields = categories.map( //This is displaying each category in a line
     (category, i) => {
 
       const checked = category === props.activeCategory
@@ -12,8 +14,9 @@ const CategorySelector = (props) => {
       return (
         <CategoryField
           key={ i }
-          checked={ checked }
-          category={ category }
+          checked={ checked } //true or false
+          category={ category } //displays category name
+          handleChange={this.handleChange}
         />
       )
     }
