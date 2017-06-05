@@ -40,10 +40,26 @@ class AccountContainer extends Component {
       ],
       activeCategory: "All"
     }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange() {
-    //... your code here
+  handleChange(event) {
+    console.log("newState: " + event.target.nextElementSibling.innerHTML)
+    this.setState({
+      activeCategory: event.target.nextElementSibling.innerHTML
+    }, this.apiGetRequest)
+  }
+
+  apiGetRequest() {
+    const URL = `https://boiling-brook-94902.herokuapp.com/transactions`
+
+    fetch(URL)
+    .then(response => response.json())
+    .then(jsonResponse => this.setState({
+      transactions: jsonResponse
+    })
+    )
   }
 
   render() {
@@ -55,11 +71,14 @@ class AccountContainer extends Component {
         <CategorySelector
           transactions={ displayedTransactions }
           activeCategory={ this.state.activeCategory }
-          handleChange={ "...your code here" }
+          handleChange={ this.handleChange }
         />
+
+        <p>Current Category: {this.state.activeCategory}</p>
 
         <TransactionsList
           transactions={ displayedTransactions }
+          activeCategory={ this.state.activeCategory }
         />
 
       </div>
